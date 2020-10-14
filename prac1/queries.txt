@@ -1,0 +1,18 @@
+ create keyspace bookshelf with replication = {'class' : 'SimpleStrategy', 'replication_factor' : 2};
+ drop keyspace bookshelf;
+ use bookshelf
+ create table book ( book_id uuid, name text, creation_date text, author_id uuid, author_name text, description text, PRIMARY KEY (book_id, author_id));
+ create table author(author_id uuid,
+                ... name text,
+                ... birth_date text,
+                ... death_date text,
+                ... primary key (author_id));
+ insert into author(author_id, name, birth_date, death_date) values (uuid(), 'name', '2011', '2020');
+ insert into author(author_id, name, birth_date, death_date) values (uuid(), 'Murakami', '01-12-1949', null);
+ select * from author ;
+ insert into book(book_id, name, creation_date, author_id, author_name, description) values (uuid(), 'Мой любимый sputnik', '1999', '44e9ae6f-02db-461f-9426-dfa1bf0428f4', 'Murakami', 'Very interesting and beautiful book from Haruki Murakami');
+ select * from book;
+ delete from author where name = 'name';
+
+ create table book_author (book_id uuid, author_id uuid, book_name text,
+    primary key (book_id, author_id)) with clustering order by (author_id asc);

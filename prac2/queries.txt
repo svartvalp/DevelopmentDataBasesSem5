@@ -1,0 +1,17 @@
+set mykey myvalue ex 11
+exists mykey
+getset mykey anothervalue
+ del mykey
+ get mykey
+ set key val
+ append key ue
+ get key
+ set number 1
+ incr number
+  get number
+  hset table key value
+  hget table key
+  sadd set 1 2 3 1
+ smembers set
+ multi
+ exec
